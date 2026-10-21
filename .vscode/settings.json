@@ -1,0 +1,4 @@
+{
+  "python.defaultInterpreterPath": "/home/marques/.venvs/python/bin/python",
+  "python.terminal.activateEnvironment": true
+}
