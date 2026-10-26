@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title description">
+  <title id="title">Fluxo de uso do Mesclador de PDFs</title>
+  <desc id="description">Quatro passos: selecionar arquivos, organizar a ordem, escolher o destino e gerar um PDF em A4.</desc>
+  <rect width="1200" height="360" rx="28" fill="#121826"/>
+  <text x="600" y="62" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Como criar um PDF mesclado</text>
+  <g font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(55 110)">
+      <rect width="235" height="180" rx="20" fill="#1e293b" stroke="#c90000" stroke-width="3"/>
+      <circle cx="117" cy="52" r="28" fill="#c90000"/>
+      <text x="117" y="61" fill="#ffffff" font-size="28" font-weight="700">1</text>
+      <text x="117" y="113" fill="#ffffff" font-size="20" font-weight="700">Selecione PDFs</text>
+      <text x="117" y="143" fill="#cbd5e1" font-size="15">de várias pastas</text>
+    </g>
+    <path d="M310 200 H355" stroke="#c90000" stroke-width="6" stroke-linecap="round"/>
+    <path d="M347 187 L365 200 L347 213" fill="none" stroke="#c90000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(385 110)">
+      <rect width="235" height="180" rx="20" fill="#1e293b" stroke="#c90000" stroke-width="3"/>
+      <circle cx="117" cy="52" r="28" fill="#c90000"/>
+      <text x="117" y="61" fill="#ffffff" font-size="28" font-weight="700">2</text>
+      <text x="117" y="113" fill="#ffffff" font-size="20" font-weight="700">Organize a ordem</text>
+      <text x="117" y="143" fill="#cbd5e1" font-size="15">suba ou desça arquivos</text>
+    </g>
+    <path d="M640 200 H685" stroke="#c90000" stroke-width="6" stroke-linecap="round"/>
+    <path d="M677 187 L695 200 L677 213" fill="none" stroke="#c90000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(715 110)">
+      <rect width="235" height="180" rx="20" fill="#1e293b" stroke="#c90000" stroke-width="3"/>
+      <circle cx="117" cy="52" r="28" fill="#c90000"/>
+      <text x="117" y="61" fill="#ffffff" font-size="28" font-weight="700">3</text>
+      <text x="117" y="113" fill="#ffffff" font-size="20" font-weight="700">Defina o destino</text>
+      <text x="117" y="143" fill="#cbd5e1" font-size="15">escolha nome e pasta</text>
+    </g>
+    <path d="M970 200 H1015" stroke="#c90000" stroke-width="6" stroke-linecap="round"/>
+    <path d="M1007 187 L1025 200 L1007 213" fill="none" stroke="#c90000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(1045 110)">
+      <rect width="100" height="180" rx="20" fill="#c90000"/>
+      <text x="50" y="74" fill="#ffffff" font-size="34" font-weight="700">4</text>
+      <text x="50" y="118" fill="#ffffff" font-size="16" font-weight="700">Gerar</text>
+      <text x="50" y="142" fill="#ffffff" font-size="16" font-weight="700">A4</text>
+    </g>
+  </g>
+</svg>
