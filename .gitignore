@@ -1,5 +1,6 @@
 # Python virtual environments (create one per operating system)
 .venv/
+.venv-*/
 venv/
 
 # Python bytecode

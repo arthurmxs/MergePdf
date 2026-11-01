@@ -1,26 +1,27 @@
-# Mesclador de PDFs
+# MergePdf
 
 <p align="center">
-  <img src="assets/app_icon.png" width="128" alt="Ícone de pasta do Mesclador de PDFs">
+  <img src="assets/app_icon.png" width="128" alt="Ícone do MergePdf">
 </p>
 
-Aplicativo desktop em Python para unir vários arquivos PDF em um único documento. Selecione PDFs de pastas diferentes, defina a ordem e salve o resultado onde quiser.
+Aplicativo desktop em Python para criar um PDF a partir de imagens ou unir vários arquivos PDF em um único documento. Selecione arquivos de pastas diferentes, organize a ordem e escolha onde salvar o resultado.
 
 ![Fluxo de uso do aplicativo](assets/como-funciona.svg)
 
 ## Recursos
 
+- Criação de PDF a partir de imagens JPG, PNG, WEBP, BMP, TIFF e GIF.
 - Seleção de vários PDFs, mesmo que estejam em pastas diferentes.
-- Organização visual da ordem de cada arquivo com os botões **Subir** e **Descer**.
+- Reordenação dos arquivos arrastando as linhas com o mouse.
 - Remoção de arquivos selecionados ou limpeza completa da lista.
-- Escolha da pasta de destino e do nome do PDF final.
-- Padronização de todas as páginas para **A4 retrato**.
-- Conteúdo centralizado e redimensionado proporcionalmente, sem distorção ou corte.
-- Proteção contra sobrescrever um dos PDFs usados como entrada.
+- Escolha do destino e do nome do PDF final.
+- Padronização das páginas para **A4 retrato**, com imagens centralizadas e redimensionadas proporcionalmente, sem distorção.
+- Proteção contra sobrescrever um arquivo usado como entrada.
+- Confirmação após criar ou mesclar o PDF, mostrando o caminho do arquivo salvo.
 
 ## Pré-requisitos
 
-- Python 3.9 ou superior
+- Python 3.10 ou superior
 - Windows, macOS ou Linux com interface gráfica
 
 ## Instalação
@@ -53,13 +54,13 @@ Inicie o aplicativo:
 python script.py
 ```
 
-1. Clique em **Adicionar PDFs** e selecione os documentos desejados.
-2. Selecione um arquivo na lista e use **Subir** ou **Descer** para definir a ordem das páginas no resultado.
-3. Clique em **Escolher destino**, selecione a pasta e escreva o nome desejado para o PDF final.
-4. Clique em **Mesclar PDFs**.
-5. O arquivo será criado com todas as páginas no formato A4.
+1. Escolha **Criar PDF** para converter imagens ou **Mesclar PDF** para unir documentos existentes.
+2. Clique em **Adicionar imagens** ou **Adicionar PDFs** e selecione os arquivos desejados.
+3. Arraste as linhas com o mouse para definir a ordem das páginas no resultado.
+4. Clique em **Escolher destino** e indique o nome e a pasta do PDF final.
+5. Clique em **Criar PDF** ou **Mesclar PDFs**. Uma confirmação mostrará o caminho do arquivo criado.
 
-> PDFs em orientação paisagem também são aceitos. Para preservar o conteúdo, eles ficam centralizados em uma página A4 retrato e podem receber margens brancas.
+> Imagens e páginas PDF em orientação paisagem também são aceitas. O conteúdo fica centralizado em uma página A4 retrato e pode receber margens brancas para preservar a proporção.
 
 ## Estrutura do projeto
 
@@ -69,7 +70,7 @@ MergePdf/
 │   ├── app_icon.ico       # Ícone usado pela janela no Windows
 │   ├── app_icon.png       # Ícone exibido nesta documentação
 │   └── como-funciona.svg  # Diagrama de uso
-├── script.py              # Interface e lógica de mesclagem
+├── script.py              # Interface, conversão de imagens e mesclagem
 └── requirements.txt       # Dependências do projeto
 ```
 
@@ -77,3 +78,4 @@ MergePdf/
 
 - [CustomTkinter](https://customtkinter.tomschimansky.com/) — interface gráfica.
 - [PyPDF2](https://pypdf2.readthedocs.io/) — leitura, ajuste para A4 e mesclagem dos PDFs.
+- [Pillow](https://pillow.readthedocs.io/) — leitura e conversão de imagens para PDF.
