@@ -1,109 +1,69 @@
 # MergePdf
 
 <p align="center">
-  <img src="assets/app_icon.png" width="128" alt="Ícone do MergePdf">
+  <img src="assets/app_icon.png" width="120" alt="Ícone do MergePdf">
 </p>
 
-Aplicativo desktop em Python para criar um PDF a partir de imagens ou unir vários arquivos PDF em um único documento. Selecione arquivos de pastas diferentes, organize a ordem e escolha onde salvar o resultado.
+<p align="center">
+  Crie PDFs a partir de imagens ou una vários PDFs em um único arquivo, de forma simples.
+</p>
 
-![Fluxo de uso do aplicativo](assets/como-funciona.svg)
+## Visão geral
+
+O MergePdf é um aplicativo para Windows que permite criar um PDF com imagens ou mesclar vários documentos PDF. Basta adicionar os arquivos, organizar a ordem e escolher onde deseja salvar o resultado.
 
 ## Recursos
 
-- Criação de PDF a partir de imagens JPG, PNG, WEBP, BMP, TIFF e GIF.
-- Seleção de vários PDFs, mesmo que estejam em pastas diferentes.
+- Criação de PDF a partir de imagens.
+- Mesclagem de PDFs localizados em pastas diferentes.
 - Reordenação dos arquivos arrastando as linhas com o mouse.
-- Remoção de arquivos selecionados ou limpeza completa da lista.
-- Escolha do destino e do nome do PDF final.
-- Padronização das páginas para **A4 retrato**, com imagens centralizadas e redimensionadas proporcionalmente, sem distorção.
-- Proteção contra sobrescrever um arquivo usado como entrada.
-- Confirmação após criar ou mesclar o PDF, mostrando o caminho do arquivo salvo.
+- Escolha do nome e da pasta do arquivo final.
+- Páginas padronizadas em A4, preservando a proporção do conteúdo.
+- Verificação de atualizações ao abrir o aplicativo.
 
-## Pré-requisitos
+## Interface
 
-- Python 3.10 ou superior
-- Windows, macOS ou Linux com interface gráfica
+![Tela principal do MergePdf](assets/tela-principal.png)
 
-## Instalação
+## Instalação no Windows
 
-Clone o repositório e entre na pasta do projeto:
+1. Acesse a página de [Releases do projeto](https://github.com/arthurmxs/MergePdf/releases).
+2. Na versão mais recente, baixe o arquivo `MergePdf-Setup.exe`.
+3. Abra o arquivo baixado.
+4. Siga as etapas do instalador.
+5. Após a instalação, abra **MergePdf** pelo Menu Iniciar ou pelo atalho criado.
 
-```powershell
-git clone https://github.com/arthurmxs/MergePdf.git
-cd MergePdf
-```
-
-Crie e ative um ambiente virtual (recomendado):
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-Instale as dependências:
-
-```powershell
-pip install -r requirements.txt
-```
+> Ao abrir o aplicativo, ele verifica se existe uma atualização disponível e oferece a instalação da versão nova.
 
 ## Como usar
 
-Inicie o aplicativo:
+### Criar PDF com imagens
 
-```powershell
-python script.py
-```
+1. Abra o MergePdf e escolha **Criar PDF**.
+2. Clique em **Adicionar imagens**.
+3. Selecione uma ou mais imagens.
+4. Arraste os itens da lista para organizar a ordem das páginas.
+5. Clique em **Escolher destino** para definir o nome e a pasta do arquivo.
+6. Clique em **Criar PDF**.
 
-1. Escolha **Criar PDF** para converter imagens ou **Mesclar PDF** para unir documentos existentes.
-2. Clique em **Adicionar imagens** ou **Adicionar PDFs** e selecione os arquivos desejados.
-3. Arraste as linhas com o mouse para definir a ordem das páginas no resultado.
-4. Clique em **Escolher destino** e indique o nome e a pasta do PDF final.
-5. Clique em **Criar PDF** ou **Mesclar PDFs**. Uma confirmação mostrará o caminho do arquivo criado.
+### Mesclar PDFs
 
-> Imagens e páginas PDF em orientação paisagem também são aceitas. O conteúdo fica centralizado em uma página A4 retrato e pode receber margens brancas para preservar a proporção.
+1. Escolha **Mesclar PDF**.
+2. Clique em **Adicionar PDFs**.
+3. Selecione os documentos que deseja unir.
+4. Arraste os itens para definir a ordem.
+5. Clique em **Escolher destino**.
+6. Clique em **Mesclar PDFs**.
 
-## Estrutura do projeto
+## Formatos aceitos
 
-```text
-MergePdf/
-├── assets/
-│   ├── app_icon.ico       # Ícone usado pela janela no Windows
-│   ├── app_icon.png       # Ícone exibido nesta documentação
-│   └── como-funciona.svg  # Diagrama de uso
-├── script.py              # Interface, conversão de imagens e mesclagem
-└── requirements.txt       # Dependências do projeto
-```
+| Função | Formatos |
+| --- | --- |
+| Criar PDF | JPG, JPEG, PNG, WEBP, BMP, TIFF e GIF |
+| Mesclar PDF | PDF |
 
-## Dependências
+## Observações
 
-- [CustomTkinter](https://customtkinter.tomschimansky.com/) — interface gráfica.
-- [PyPDF2](https://pypdf2.readthedocs.io/) — leitura, ajuste para A4 e mesclagem dos PDFs.
-- [Pillow](https://pillow.readthedocs.io/) — leitura e conversão de imagens para PDF.
-
-## Instalador Windows e atualizações
-
-O instalador para Windows é gerado automaticamente pelo GitHub Actions. O aplicativo consulta a [página de Releases](https://github.com/arthurmxs/MergePdf/releases) ao iniciar; quando uma versão mais nova estiver publicada, ele oferece baixar e abrir o instalador de atualização.
-
-Para publicar uma versão nova:
-
-1. Altere `APP_VERSION` em `version.py` (por exemplo, de `1.0.0` para `1.0.1`).
-2. Faça commit e envie a alteração para a branch `main`.
-3. Crie e envie uma tag com a mesma versão, precedida por `v`:
-
-```powershell
-git tag v1.0.1
-git push origin v1.0.1
-```
-
-O GitHub Actions irá gerar `MergePdf-Setup.exe` e criar a Release. Quem já tiver uma versão anterior instalada verá o aviso de atualização ao abrir o aplicativo.
-
-### Gerar localmente
-
-Para gerar o instalador no seu computador, instale o [Inno Setup](https://jrsoftware.org/isdl.php) e execute:
-
-```powershell
-python -m pip install -r requirements.txt -r requirements-build.txt
-.\build.ps1
-```
-
-O resultado será criado em `dist\installer\MergePdf-Setup.exe`.
+- Os arquivos originais não são alterados.
+- Imagens e PDFs em paisagem são centralizados em páginas A4 e podem receber margens brancas para preservar a proporção.
+- PDFs protegidos por senha não podem ser mesclados.
