@@ -31,7 +31,7 @@ class PdfMergerApp(ctk.CTk):
         self._build_interface()
 
     def _build_interface(self) -> None:
-        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1) 
         self.grid_rowconfigure(1, weight=1)
 
         header = ctk.CTkFrame(self, corner_radius=0)
