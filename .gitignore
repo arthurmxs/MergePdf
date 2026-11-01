@@ -9,3 +9,8 @@ __pycache__/
 
 # PDFs
 pdfs/
+
+# Artefatos de compilação Windows
+build/
+dist/
+*.spec

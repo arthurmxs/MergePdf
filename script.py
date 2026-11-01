@@ -1,16 +1,22 @@
 """Aplicativo para criar PDFs a partir de imagens e mesclar arquivos PDF."""
 
 from pathlib import Path
+from queue import Empty, Queue
+import subprocess
 import sys
+import threading
 from tkinter import END, Listbox, StringVar, filedialog, messagebox
 
 import customtkinter as ctk
 from PIL import Image, ImageOps
 from PyPDF2 import PdfReader, PdfWriter, Transformation
 from PyPDF2.errors import PyPdfError
+from updater import Release, UpdateError, download_installer, get_latest_release, is_newer
+from version import APP_VERSION
 
 
-ASSETS_DIR = Path(__file__).resolve().parent / "assets"
+BASE_DIR = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
+ASSETS_DIR = BASE_DIR / "assets"
 A4_WIDTH = 595.28
 A4_HEIGHT = 841.89
 PDF_DPI = 150
@@ -37,11 +43,13 @@ class PdfMergerApp(ctk.CTk):
         self._drag_index: int | None = None
         self._drag_start_y = 0
         self._dragging = False
+        self._update_events: Queue[tuple[str, Release | Path | str]] = Queue()
 
         ctk.set_appearance_mode("system")
         ctk.set_default_color_theme("blue")
         self._build_interface()
         self._set_mode("images")
+        self._check_for_updates()
 
     @property
     def active_paths(self) -> list[Path]:
@@ -177,6 +185,62 @@ class PdfMergerApp(ctk.CTk):
     def _destination_text(self) -> str:
         output_path = self.output_paths[self.mode]
         return f"Destino: {output_path}" if output_path else "Nenhum destino escolhido"
+
+    def _check_for_updates(self) -> None:
+        """Check GitHub in a background thread so the application opens normally."""
+        threading.Thread(target=self._find_update, daemon=True).start()
+        self.after(250, self._process_update_events)
+
+    def _find_update(self) -> None:
+        try:
+            release = get_latest_release()
+        except UpdateError:
+            return
+        if release and is_newer(release.version, APP_VERSION):
+            self._update_events.put(("available", release))
+
+    def _offer_update(self, release: Release) -> None:
+        if not self.winfo_exists():
+            return
+        wants_update = messagebox.askyesno(
+            "Atualização disponível",
+            f"A versão {release.version.lstrip('v')} está disponível.\n\n"
+            "Deseja baixar o instalador para atualizar agora?",
+        )
+        if wants_update:
+            threading.Thread(target=self._download_update, args=(release,), daemon=True).start()
+
+    def _download_update(self, release: Release) -> None:
+        try:
+            installer = download_installer(release)
+        except UpdateError as error:
+            self._update_events.put(("error", str(error)))
+            return
+        self._update_events.put(("installer", installer))
+
+    def _process_update_events(self) -> None:
+        """Process update results on Tkinter's main thread."""
+        try:
+            while True:
+                event, payload = self._update_events.get_nowait()
+                if event == "available":
+                    self._offer_update(payload)  # type: ignore[arg-type]
+                elif event == "installer":
+                    self._start_installer(payload)  # type: ignore[arg-type]
+                else:
+                    messagebox.showerror("Erro ao atualizar", str(payload))
+        except Empty:
+            pass
+        if self.winfo_exists():
+            self.after(250, self._process_update_events)
+
+    def _start_installer(self, installer: Path) -> None:
+        try:
+            subprocess.Popen([str(installer)])
+        except OSError as error:
+            messagebox.showerror("Erro ao atualizar", f"Não foi possível abrir o instalador:\n{error}")
+            return
+        self.destroy()
 
     def add_files(self) -> None:
         if self.mode == "images":

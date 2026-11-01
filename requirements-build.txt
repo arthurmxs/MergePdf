@@ -1,0 +1,2 @@
+# Dependência usada somente para gerar o executável Windows.
+pyinstaller>=6.0,<7

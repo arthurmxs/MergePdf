@@ -1,0 +1,43 @@
+name: Criar instalador Windows
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Instalar dependências de compilação
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt -r requirements-build.txt
+          choco install innosetup --no-progress --yes
+
+      - name: Gerar instalador
+        shell: pwsh
+        run: |
+          $expectedVersion = "${{ github.ref_name }}".TrimStart("v")
+          $appVersion = python -c "from version import APP_VERSION; print(APP_VERSION)"
+          if ($appVersion -ne $expectedVersion) {
+            throw "A tag v$expectedVersion não corresponde à versão $appVersion em version.py."
+          }
+          .\build.ps1
+
+      - name: Publicar release com instalador
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: dist/installer/MergePdf-Setup.exe

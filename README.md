@@ -79,3 +79,31 @@ MergePdf/
 - [CustomTkinter](https://customtkinter.tomschimansky.com/) — interface gráfica.
 - [PyPDF2](https://pypdf2.readthedocs.io/) — leitura, ajuste para A4 e mesclagem dos PDFs.
 - [Pillow](https://pillow.readthedocs.io/) — leitura e conversão de imagens para PDF.
+
+## Instalador Windows e atualizações
+
+O instalador para Windows é gerado automaticamente pelo GitHub Actions. O aplicativo consulta a [página de Releases](https://github.com/arthurmxs/MergePdf/releases) ao iniciar; quando uma versão mais nova estiver publicada, ele oferece baixar e abrir o instalador de atualização.
+
+Para publicar uma versão nova:
+
+1. Altere `APP_VERSION` em `version.py` (por exemplo, de `1.0.0` para `1.0.1`).
+2. Faça commit e envie a alteração para a branch `main`.
+3. Crie e envie uma tag com a mesma versão, precedida por `v`:
+
+```powershell
+git tag v1.0.1
+git push origin v1.0.1
+```
+
+O GitHub Actions irá gerar `MergePdf-Setup.exe` e criar a Release. Quem já tiver uma versão anterior instalada verá o aviso de atualização ao abrir o aplicativo.
+
+### Gerar localmente
+
+Para gerar o instalador no seu computador, instale o [Inno Setup](https://jrsoftware.org/isdl.php) e execute:
+
+```powershell
+python -m pip install -r requirements.txt -r requirements-build.txt
+.\build.ps1
+```
+
+O resultado será criado em `dist\installer\MergePdf-Setup.exe`.
